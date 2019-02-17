@@ -8,7 +8,6 @@ import pandas as pd
 
 # region Constants
 
-DEFAULT = object()
 TODAY = datetime.datetime.now().strftime("%Y-%m-%d")
 
 # endregion
@@ -56,9 +55,9 @@ class MintManager(object):
         print("Getting accounts...")
         return self.mint.get_accounts()
 
-    def save_accounts(self, accounts=DEFAULT):
+    def save_accounts(self, accounts=None):
         """Write the account data to a file"""
-        if accounts == DEFAULT:
+        if accounts is None:
             accounts = self.get_accounts()
 
         outfile_name = str("history/%s/Accounts.csv" % TODAY)
@@ -77,9 +76,9 @@ class MintManager(object):
         return self.mint.get_budgets()
 
     # TODO: format budget date output
-    def save_budgets(self, budgets=DEFAULT):
+    def save_budgets(self, budgets=None):
         """Write the budget data to a file"""
-        if budgets == DEFAULT:
+        if budgets is None:
             budgets = self.get_budgets()
 
         outfile_name = str("history/%s/Budgets.csv" % TODAY)
@@ -93,9 +92,9 @@ class MintManager(object):
         print("Getting credit score...")
         return self.mint.get_credit_score()
 
-    def save_credit_score(self, credit_score=DEFAULT):
+    def save_credit_score(self, credit_score=None):
         """Write the credit score to a file"""
-        if credit_score == DEFAULT:
+        if credit_score is None:
             credit_score = self.get_credit_score()
 
         outfile_name = str("history/%s/CreditScore.csv" % TODAY)
@@ -109,9 +108,9 @@ class MintManager(object):
         print("Getting net worth...")
         return self.mint.get_net_worth()
 
-    def save_net_worth(self, net_worth=DEFAULT):
+    def save_net_worth(self, net_worth=None):
         """Write the net worth to a file"""
-        if net_worth == DEFAULT:
+        if net_worth is None:
             net_worth = self.get_net_worth()
 
         outfile_name = str("history/%s/NetWorth.csv" % TODAY)
@@ -125,12 +124,12 @@ class MintManager(object):
         print("Getting transactions...")
         return self.mint.get_transactions()
 
-    def save_transactions(self, txs=DEFAULT):
+    def save_transactions(self, transactions=None):
         """Write the transaction data to a file"""
-        if txs == DEFAULT:
-            txs = self.get_transactions()
+        if transactions is None:
+            transactions = self.get_transactions()
 
         outfile_name = str("history/%s/Transactions.csv" % TODAY)
         print("Saving transaction data to %s..." % outfile_name)
-        pd.DataFrame.to_csv(txs, outfile_name)
+        pd.DataFrame.to_csv(transactions, outfile_name)
         print("Saved transaction data\n")
