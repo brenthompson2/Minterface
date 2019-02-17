@@ -14,7 +14,7 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # Login to mint
-response = input("Do you have credentials saved in credentials.txt? (y/n): ")
+response = input("Are credentials saved in credentials.txt? (y/n): ")
 if response == 'y' or response == 'Y':
     file = open('credentials.txt')
     username = file.readline()
