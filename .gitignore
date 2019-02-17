@@ -1,6 +1,16 @@
+# Python
+__pycache__/*
+
+# PyCharm
 .idea/Minterface.iml
 .idea/encodings.xml
 .idea/misc.xml
 .idea/modules.xml
 .idea/workspace.xml
 .idea/vcs.xml
+.idea/dictionaries/bt.xml
+
+# Minterface
+credentials.txt
+history/*
+chromedriver
