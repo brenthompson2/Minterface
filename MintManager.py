@@ -73,7 +73,7 @@ class MintManager(object):
         print("Saved account data\n")
 
     def get_budgets(self):
-        """Get a pandas DataFrame containing the budget data"""
+        """Get the budget data"""
         print("Getting budgets...")
         return self.mint.get_budgets()
 

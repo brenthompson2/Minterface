@@ -4,8 +4,8 @@ from MintManager import MintManager
 print("\n\nWelcome to Minterface CLI, a command line interface for saving Intuit Mint account data to disk\n")
 
 # Login to mint
-credentials_saved = input("Do you have credentials saved in credentials.txt? (y/n): ")
-if credentials_saved == 'y' or credentials_saved == 'Y':
+response = input("Do you have credentials saved in credentials.txt? (y/n): ")
+if response == 'y' or response == 'Y':
     file = open('credentials.txt')
     username = file.readline()
     password = file.readline()
