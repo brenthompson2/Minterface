@@ -9,7 +9,7 @@ In order to scrape the data from Mint, they use the [MintAPI by mrooney](https:/
 ### Installation
 
 1. Download the files or clone the repo
-2. Ensure python is installed by running `python --version` in terminal (Built with 3.6)
+2. Ensure python is installed by running `python3 --version` in terminal (Built with 3.6.5)
 
 **Saved Credentials**
 
