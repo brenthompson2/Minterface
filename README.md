@@ -32,13 +32,13 @@ The Minterface CLI is a lightweight command line interface for getting the diffe
 and writing each to a file in a directory structure that allows for daily updates.
 
 ```
-/history
-    /<YYYY-MM-DD>
-        /Accounts.csv
-        /Budgets.csv
-        /CreditScore.csv
-        /NetWorth.csv
-        /Transactions.csv
+history/
+    <YYYY-MM-DD>/
+        Accounts.csv
+        Budgets.csv
+        CreditScore.csv
+        NetWorth.csv
+        Transactions.csv
 ```
 
 **Using Minterface CLI**
