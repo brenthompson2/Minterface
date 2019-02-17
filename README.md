@@ -33,6 +33,17 @@ MySecretPassword
 Minterface is the main GUI dashboard for displaying reports that allow
 for advanced data analysis on the Mint data.
 
+**As of 02/17/19 the GUI Dash app just shows a basic table of all transactions**
+
+**Using Minterface GUI**
+
+1. Run the application with `python Minterface.py`
+1. It will ask if credentials are saved to `credentials.txt`. If not, it will prompt for them.
+1. While connecting to Mint it will open a browser session, login, and wait for the account data to refresh. 
+Two factor authentication is supported but will require user intervention.
+1. The Dash app will launch, and for some reason the script prompts will restart.
+1. After the data is re-retrieved, the GUI should be visible at the url mentioned in the terminal
+
 # Minterface CLI
 
 The Minterface CLI is a lightweight command line interface for getting the different pieces of Mint data
