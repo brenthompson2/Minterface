@@ -1,12 +1,18 @@
-# Minterface
+# Overview
 
-A custom UI/UX for reporting and data analysis on financial data retrieved from [Intuit Mint](https://www.mint.com/).
+Minterface is comprised of two different components used for 
+analysis of financial data from [Intuit Mint](https://www.mint.com/).
+
+- **Minterface CLI** is a lightweight command line interface for getting the different pieces of Mint data
+and writing each to a file in a directory structure that allows for daily updates.
+- **Minterface** is the main GUI dashboard for displaying reports that allow
+for advanced data analysis on the Mint data.
 
 These tools are written in Python and the [Dash](https://plot.ly/products/dash/) UI framework by Plotly.
 In order to scrape the data from Mint, they use the [MintAPI by mrooney](https://github.com/mrooney/mintapi). 
 
 
-### Installation
+# Installation
 
 1. Download the files or clone the repo
 2. Ensure python is installed by running `python3 --version` in terminal (Built with 3.6.5)
@@ -22,13 +28,14 @@ MyFancyUsername
 MySecretPassword
 ``` 
 
-### Minterface GUI
+# Minterface
 
-TODO
+Minterface is the main GUI dashboard for displaying reports that allow
+for advanced data analysis on the Mint data.
 
-### Minterface CLI
+# Minterface CLI
 
-The Minterface CLI is a lightweight command line interface for getting the different pieces of mint data
+The Minterface CLI is a lightweight command line interface for getting the different pieces of Mint data
 and writing each to a file in a directory structure that allows for daily updates.
 
 ```
