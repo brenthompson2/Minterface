@@ -1,4 +1,5 @@
 from MintManager import MintManager
+from MintAnalyzer import MintAnalyzer
 
 print("\n\n")
 print("===================================================================")
@@ -18,6 +19,7 @@ else:
     username = input("Username: ")
     password = input("Password: ")
 mint = MintManager(username, password)
+mint_analyzer = MintAnalyzer(mint)
 
 # Save data
 response = input("Save All Data? (y/n): ")
@@ -26,7 +28,15 @@ if response == 'y' or response == 'Y':
     mint.save_budgets()
     mint.save_credit_score()
     mint.save_net_worth()
-    mint.save_transactions()
+
+    txs = mint.get_transactions()
+    mint.save_transactions(txs)
+
+    txs_per_paycheck = mint_analyzer.get_transactions_per_paycheck(txs)
+    mint_analyzer.save_transactions_per_paycheck(None, txs_per_paycheck)
+
+    spending_per_category_per_paycheck = mint_analyzer.get_spending_per_category_per_paycheck(None, txs_per_paycheck)
+    mint_analyzer.save_spending_per_category_per_paycheck(spending_per_category_per_paycheck)
 else:
     response = input("Save Account Data? (y/n): ")
     if response == 'y' or response == 'Y':
@@ -47,6 +57,15 @@ else:
     response = input("Save Transaction Data? (y/n): ")
     if response == 'y' or response == 'Y':
         mint.save_transactions()
+
+    response = input("Save Transactions Per Paycheck? (y/n): ")
+    if response == 'y' or response == 'Y':
+        mint_analyzer.save_transactions_per_paycheck()
+
+    response = input("Save Spending Per Category Per Paycheck? (y/n): ")
+    if response == 'y' or response == 'Y':
+        data = mint_analyzer.get_spending_per_category_per_paycheck()
+        mint_analyzer.save_spending_per_category_per_paycheck(data)
 
 # Close
 mint.__del__()
