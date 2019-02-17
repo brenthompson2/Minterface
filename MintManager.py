@@ -36,7 +36,6 @@ def safe_open_w(path):
 # endregion
 
 
-# Uses the package mintapi by mrooney to scrape data from the Intuit Mint online dashboard
 class MintManager(object):
     """Exposes methods for getting or saving Intuit Mint data"""
 
