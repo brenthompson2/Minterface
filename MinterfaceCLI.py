@@ -1,7 +1,10 @@
 from MintManager import MintManager
 
-
-print("\n\nWelcome to Minterface CLI, a command line interface for saving Intuit Mint account data to disk\n")
+print("\n\n")
+print("===================================================================")
+print("Welcome to Minterface CLI, a command line interface for saving Intuit Mint account data to disk")
+print("===================================================================")
+print("\n")
 
 # Login to mint
 response = input("Do you have credentials saved in credentials.txt? (y/n): ")
