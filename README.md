@@ -11,21 +11,44 @@ for advanced data analysis on the Mint data.
 These tools are written in Python and the [Dash](https://plot.ly/products/dash/) UI framework by Plotly.
 In order to scrape the data from Mint, they use the [MintAPI by mrooney](https://github.com/mrooney/mintapi). 
 
-# Installation
+# Advanced Mint Data Analysis
 
-1. Download the files or clone the repo
-2. Ensure python is installed by running `python3 --version` in terminal (Built with 3.6.5)
+The whole purpose of these applications is to add advanced analysis to the financial data retrieved from Mint. 
+The applications pull down the data from Mint and store it
+time-stamped in the directory structure `/history/<Date Stored>/`. 
 
-### Saved Credentials
+As the user uses the applications more, the changes in data from one session to the next begin to tell a story. 
+This allows `Minterface` to start showing plots and other useful graphs of the data over time.
 
-The application allows for the user to either type in their credentials every time or
-load them from a file called `credentials.txt`. 
-The format of that file is bare, with nothing but the username on the first line and the password on the second line.
+### I) The Data
 
-```
-MyFancyUsername
-MySecretPassword
-``` 
+**A) Mint data from mintapi:**
+
+- Accounts
+- Budgets
+- CreditScore
+- NetWorth
+- Transactions
+
+**B) Minterface data:**
+
+- **Transactions per Paycheck** = A file per paycheck containing a DataFrame of
+all of the transaction data during that pay period
+- **Spending per Category per Paycheck** = A file per paycheck showing
+the amount spent per transaction category during that pay period
+
+### II) Data Analysis
+
+**NOTE 02/17/19: None of this is implemented yet** 
+
+- **Spending per Category per Paycheck** = A pie chart showing what percentage of
+spending that pay period went to which category
+- **Average Spending Per Category Per Paycheck** = A pie graph showing the average percentage of
+spending that went to each category for all pay periods
+- **Accounts Over Time** = A line graph tracking account balances over time including net worth
+- **Credit Score Over Time** = A line graph tracking credit score over time
+- **Spending Per Category Per Paycheck Over Time** = A line graph tracking how much was spent
+ per transaction category per paycheck over time
 
 # Minterface
 
@@ -73,41 +96,18 @@ history/
 Two factor authentication is supported but will require user intervention.
 1. The user will then be able to specify which pieces of data to retrieve and save
 
-# Advanced Mint Data Analysis
+# Installation
 
-The whole purpose of these applications is to add advanced analysis to the financial data retrieved from Mint. 
-The applications pull down the data from Mint and store it
-time-stamped in the directory structure `/history/<Date Stored>/`. 
+1. Download the files or clone the repo
+2. Ensure python is installed by running `python3 --version` in terminal (Built with 3.6.5)
 
-As the user uses the applications more, the changes in data from one session to the next begin to tell a story. 
-This allows `Minterface` to start showing plots and other useful graphs of the data over time.
+### Saved Credentials
 
-### I) The Data
+The application allows for the user to either type in their credentials every time or
+load them from a file called `credentials.txt`. 
+The format of that file is bare, with nothing but the username on the first line and the password on the second line.
 
-**A) Mint data from mintapi:**
-
-- Accounts
-- Budgets
-- CreditScore
-- NetWorth
-- Transactions
-
-**B) Minterface data:**
-
-- **Transactions per Paycheck** = A file per paycheck containing a DataFrame of
-all of the transaction data during that pay period
-- **Spending per Category per Paycheck** = A file per paycheck showing
-the amount spent per transaction category during that pay period
-
-### II) Data Analysis
-
-**NOTE 02/17/19: None of this is implemented yet** 
-
-- **Spending per Category per Paycheck** = A pie chart showing what percentage of
-spending that pay period went to which category
-- **Average Spending Per Category Per Paycheck** = A pie graph showing the average percentage of
-spending that went to each category for all pay periods
-- **Accounts Over Time** = A line graph tracking account balances over time including net worth
-- **Credit Score Over Time** = A line graph tracking credit score over time
-- **Spending Per Category Per Paycheck Over Time** = A line graph tracking how much was spent
- per transaction category per paycheck over time
+```
+MyFancyUsername
+MySecretPassword
+``` 
