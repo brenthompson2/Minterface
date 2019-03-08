@@ -100,7 +100,7 @@ class MintManager(object):
         outfile_name = str("history/%s/CreditScore.csv" % TODAY)
         outfile = safe_open_w(outfile_name)
         print("Saving credit score to %s..." % outfile_name)
-        outfile.write(credit_score)
+        outfile.write(str(credit_score))
         print("Saved credit score\n")
 
     def get_net_worth(self):
