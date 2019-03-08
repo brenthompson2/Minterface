@@ -12,6 +12,7 @@ __pycache__/*
 
 # VS Code
 .vscode/*
+chromedriver.exe
 
 # Minterface
 credentials.txt
