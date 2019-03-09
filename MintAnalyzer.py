@@ -5,6 +5,8 @@ import os.path
 
 import pandas as pd
 
+from MintHistoryReader import MintHistoryReader
+
 # region Constants
 
 TODAY = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -37,6 +39,7 @@ class MintAnalyzer(object):
 
     def __init__(self, mint_manager):
         self.mint = mint_manager
+        self.mint_history_reader = MintHistoryReader()
 
     def get_transactions_per_paycheck(self, transactions=None):
         """
@@ -128,3 +131,40 @@ class MintAnalyzer(object):
 
         print("Saved amount spent per category per paycheck\n")
 
+    def get_account_balances_over_time(self, account_history=None):
+        """
+        Get a dictionary keyed by (account_provider,account_name) where the value is
+        a dictionary containing a list of retrieval dates and a list of associated balances {'dates': [YYYY-MM-DD], 'balances': [$]}
+
+        :param transactions: a dictionary keyed by (account_provider,account_name) where the value is 
+        a dictionary containing a list of retrieval dates and a list of associated balances {'dates': [YYYY-MM-DD], 'balances': [$]}
+        """
+        if account_history is None:
+            account_history = self.mint_history_reader.get_account_history()
+
+        # Get accounts
+        first_key = list(account_history.keys())[0]
+        account_providers = account_history[first_key]['provider']
+        account_names = account_history[first_key]['name']
+        
+        # Initialize dictionaries 
+        # TODO: Prepare for not all account_snapshots to have the same providers
+        account_balances_over_time = {}
+        for i in range(len(account_providers)):
+            account_balances_over_time['%s,%s' % (account_providers[i], account_names[i])] = {'dates': [], 'balances': []}
+
+        # Get {'dates': [YYYY-MM-DD], 'balances': [$]} per account for all dates
+        for date, account_snapshot in account_history.items():
+            for i in range(len(account_providers)):
+                # Get Balance for this Account For this account_snapshot
+                account_provider = account_providers[i]
+                account_name = account_names[i]
+                rows_with_that_provider = account_snapshot.loc[account_snapshot['provider'] == account_provider]
+                row_with_that_name = rows_with_that_provider.loc[rows_with_that_provider['name'] == account_name]
+                balance = row_with_that_name.iloc[0]['balance']
+
+                # Store date & balance for this account_snapshot
+                account_balances_over_time['%s,%s' % (account_provider, account_name)]['dates'].append(date)
+                account_balances_over_time['%s,%s' % (account_provider, account_name)]['balances'].append(balance)
+
+        return account_balances_over_time
