@@ -20,6 +20,7 @@ mint_analyzer = MintAnalyzer(None)
 account_balances_over_time = mint_analyzer.get_account_balances_over_time()
 account_balances_over_time_data = []
 for account_key, account in account_balances_over_time.items():
+    # TODO: Ensure debt accounts have negative balances
     account_balances_over_time_data.append({'x': account['dates'], 'y': account['balances'], 'type':'line', 'name':account_key})
 
 # Draw Dash app layout

@@ -39,13 +39,14 @@ the amount spent per transaction category during that pay period
 
 ### II) Data Analysis
 
-**NOTE 02/17/19: None of this is implemented yet** 
+- **Accounts Over Time** = A line graph tracking account balances over time
+
+**As of 03/09/19 nothing below here is implemented**
 
 - **Spending per Category per Paycheck** = A pie chart showing what percentage of
 spending that pay period went to which category
 - **Average Spending Per Category Per Paycheck** = A pie graph showing the average percentage of
 spending that went to each category for all pay periods
-- **Accounts Over Time** = A line graph tracking account balances over time including net worth
 - **Credit Score Over Time** = A line graph tracking credit score over time
 - **Spending Per Category Per Paycheck Over Time** = A line graph tracking how much was spent
  per transaction category per paycheck over time
@@ -55,16 +56,12 @@ spending that went to each category for all pay periods
 Minterface is the main GUI dashboard for displaying reports that allow
 for advanced data analysis on the Mint data.
 
-**As of 02/17/19 the GUI Dash app just shows a basic table of all transactions**
+**As of 03/09/19 the GUI Dash app just shows a graph of account balances over time**
 
 **Using Minterface GUI**
 
 1. Run the application with `</path/to/python/> ./Minterface.py`
-1. It will ask if credentials are saved to `credentials.txt`. If not, it will prompt for them.
-1. While connecting to Mint it will open a browser session, login, and wait for the account data to refresh. 
-Two factor authentication is supported but will require user intervention.
-1. The Dash app will launch, and for some reason the script prompts will restart.
-1. After the data is re-retrieved, the GUI should be visible at the url mentioned in the terminal
+1. After the data is analyzed, the GUI should be visible at the url mentioned in the terminal
 
 # Minterface CLI
 
