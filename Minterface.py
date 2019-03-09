@@ -1,7 +1,9 @@
-from MintManager import MintManager
 import dash
 import dash_table
 import dash_html_components as html
+import dash_core_components as dcc
+
+from MintAnalyzer import MintAnalyzer
 
 print("\n\n")
 print("===================================================================")
@@ -13,30 +15,22 @@ print("\n")
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-# Login to mint
-response = input("Are credentials saved in credentials.txt? (y/n): ")
-if response == 'y' or response == 'Y':
-    file = open('credentials.txt')
-    username = file.readline()
-    password = file.readline()
-    file.close()
-else:
-    print("Please supply your Intuit Mint credentials:")
-    username = input("Username: ")
-    password = input("Password: ")
-mint = MintManager(username, password)
-
-# Get transactions
-transactions = mint.get_transactions()
+# Get Account History
+mint_analyzer = MintAnalyzer(None)
+account_balances_over_time = mint_analyzer.get_account_balances_over_time()
+account_balances_over_time_data = []
+for account_key, account in account_balances_over_time.items():
+    account_balances_over_time_data.append({'x': account['dates'], 'y': account['balances'], 'type':'line', 'name':account_key})
 
 # Draw Dash app layout
 app.layout = html.Div([
-    html.H1("Transactions"),
-
-    dash_table.DataTable(
-        id='Transaction Data',
-        columns=[{"name": i, "id": i} for i in transactions.columns],
-        data=transactions.to_dict("rows")
+    dcc.Graph(id='AccountData',
+        figure = {
+            'data': account_balances_over_time_data,
+            'layout': {
+                'title': 'Account Balances Over Time'
+            }
+        }
     )
 ])
 
