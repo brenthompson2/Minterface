@@ -63,11 +63,11 @@ class MintManager(object):
         outfile_name = str("history/%s/Accounts.csv" % TODAY)
         outfile = safe_open_w(outfile_name)
         print("Saving account data to %s..." % outfile_name)
-        outfile.write(",provider,name,balance\n")
+        outfile.write(",provider,name,type,balance\n")
         for i in range(len(accounts)):
             account = accounts[i]
-            outfile.write("%d,%s,%s,%f\n" %
-                          (i, account['fiLoginDisplayName'], account['accountName'], account['currentBalance']))
+            outfile.write("%d,%s,%s,%s,%f\n" %
+                          (i, account['fiLoginDisplayName'], account['accountName'], account['accountType'], account['currentBalance']))
         print("Saved account data\n")
 
     def get_budgets(self):
@@ -133,3 +133,22 @@ class MintManager(object):
         print("Saving transaction data to %s..." % outfile_name)
         pd.DataFrame.to_csv(transactions, outfile_name)
         print("Saved transaction data\n")
+
+
+
+# region Test the class
+
+# # Login
+# file = open('credentials.txt')
+# username = file.readline()
+# password = file.readline()
+# file.close()
+# mint_manager = MintManager(username, password)
+
+# # Print full account data
+# print(mint_manager.get_accounts())
+
+# # Shutdown
+# mint_manager.__del__()
+
+# endregion

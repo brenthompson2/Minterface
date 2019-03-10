@@ -16,7 +16,14 @@ class MintHistoryReader(object):
         account_history = {}
         for folder_name in os.listdir(self.history_path):
             file_path = os.path.join(self.history_path, folder_name, 'Accounts.csv')
-            account_history[folder_name] = pd.DataFrame.from_csv(file_path)
+            account_snapshot = pd.DataFrame.from_csv(file_path)
+
+            # Make credit accounts negative            
+            for index, row in account_snapshot.iterrows():
+                if row['type'] == 'credit':
+                    account_snapshot.at[index, 'balance'] = row['balance'] * -1
+                    
+            account_history[folder_name] = account_snapshot
         return account_history
 
 # Test the class
