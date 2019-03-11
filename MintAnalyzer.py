@@ -140,7 +140,7 @@ class MintAnalyzer(object):
         a dictionary containing a list of retrieval dates and a list of associated balances {'dates': [YYYY-MM-DD], 'balances': [$]}
         """
         if account_history is None:
-            account_history = self.mint_history_reader.get_account_history()
+            account_history = self.mint_history_reader.get_accounts_over_time()
 
         # Get accounts
         first_key = list(account_history.keys())[0]
