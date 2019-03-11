@@ -56,7 +56,11 @@ spending that went to each category for all pay periods
 Minterface is the main GUI dashboard for displaying reports that allow
 for advanced data analysis on the Mint data.
 
-**As of 03/09/19 the GUI Dash app just shows a graph of account balances over time**
+Graphs:
+- Account Balances Over Time
+- Credit Score Over Time
+
+**As of 03/11/19 the GUI Dash app just shows the two graphs and has no layout or style**
 
 **Using Minterface GUI**
 
