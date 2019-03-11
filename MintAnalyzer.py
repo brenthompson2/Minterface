@@ -134,7 +134,8 @@ class MintAnalyzer(object):
     def get_account_balances_over_time(self, account_history=None):
         """
         Get a dictionary keyed by (account_provider,account_name) where the value is
-        a dictionary containing a list of retrieval dates and a list of associated balances {'dates': [YYYY-MM-DD], 'balances': [$]}
+        a dictionary containing a list of retrieval dates and a list of associated balances {'dates': [YYYY-MM-DD], 'balances': [$]}.
+        Accounts of type 'credit' have their balances turned negative.
 
         :param transactions: a dictionary keyed by (account_provider,account_name) where the value is 
         a dictionary containing a list of retrieval dates and a list of associated balances {'dates': [YYYY-MM-DD], 'balances': [$]}
@@ -163,6 +164,11 @@ class MintAnalyzer(object):
                 row_with_that_name = rows_with_that_provider.loc[rows_with_that_provider['name'] == account_name]
                 balance = row_with_that_name.iloc[0]['balance']
 
+                # Make accounts of type 'credit' negative
+                account_type = row_with_that_name.iloc[0]['type']
+                if account_type == 'credit':
+                    balance = balance * -1
+
                 # Store date & balance for this account_snapshot
                 account_balances_over_time['%s,%s' % (account_provider, account_name)]['dates'].append(date)
                 account_balances_over_time['%s,%s' % (account_provider, account_name)]['balances'].append(balance)
@@ -172,6 +178,24 @@ class MintAnalyzer(object):
     def get_credit_score_over_time(self):
         """
         Get a dictionary keyed by date retrieved where the value is the credit score at that time.
-        Only proper values are in the dictionary (if it is cast-able to an int).
+        Credit Scores that cannot be cast to an integer get removed from the dictionary.
         """
-        return self.mint_history_reader.get_credit_score_over_time()
+        credit_history = self.mint_history_reader.get_credit_score_over_time()
+        credit_history_copy = dict(credit_history)
+
+        # Ensure the credit score is an integer
+        for date, score in credit_history.items():
+            try:
+                _ = int(score)
+            except ValueError:
+                # credit score is invalid (Probably is a string saying "No credit score provided.")
+                del credit_history_copy[date]
+                pass
+
+        return credit_history_copy
+
+# region Test the Class
+# mint_analyzer = MintAnalyzer(None)
+# mint_analyzer.get_credit_score_over_time()
+
+# endregion
