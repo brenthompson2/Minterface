@@ -40,14 +40,14 @@ the amount spent per transaction category during that pay period
 ### II) Data Analysis
 
 - **Accounts Over Time** = A line graph tracking account balances over time
+- **Credit Score Over Time** = A line graph tracking credit score over time
 
-**As of 03/09/19 nothing below here is implemented**
+**As of 03/11/19 nothing below here is implemented**
 
 - **Spending per Category per Paycheck** = A pie chart showing what percentage of
 spending that pay period went to which category
 - **Average Spending Per Category Per Paycheck** = A pie graph showing the average percentage of
 spending that went to each category for all pay periods
-- **Credit Score Over Time** = A line graph tracking credit score over time
 - **Spending Per Category Per Paycheck Over Time** = A line graph tracking how much was spent
  per transaction category per paycheck over time
 

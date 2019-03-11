@@ -85,6 +85,10 @@ def read_select_data(analyzer):
         # TODO: Save the data, create a graph off the data, or at least just print the data in a more consumable way
         print(analyzer.get_account_balances_over_time())
 
+    response = input("Get Credit Score Over Time? (y/n): ")
+    if response == 'y' or response == 'Y':
+        print(analyzer.get_credit_score_over_time())
+
 
 # endregion
 

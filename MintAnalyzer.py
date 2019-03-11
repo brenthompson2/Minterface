@@ -168,3 +168,10 @@ class MintAnalyzer(object):
                 account_balances_over_time['%s,%s' % (account_provider, account_name)]['balances'].append(balance)
 
         return account_balances_over_time
+
+    def get_credit_score_over_time(self):
+        """
+        Get a dictionary keyed by date retrieved where the value is the credit score at that time.
+        Only proper values are in the dictionary (if it is cast-able to an int).
+        """
+        return self.mint_history_reader.get_credit_score_over_time()
