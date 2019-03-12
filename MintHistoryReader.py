@@ -16,7 +16,7 @@ class MintHistoryReader(object):
         account_history = {}
         for folder_date in os.listdir(self.history_path):
             file_path = os.path.join(self.history_path, folder_date, 'Accounts.csv')
-            account_history[folder_date] = pd.DataFrame.from_csv(file_path)
+            account_history[folder_date] = pd.read_csv(file_path)
         return account_history
 
     def get_credit_score_over_time(self):
