@@ -60,7 +60,7 @@ Graphs:
 - Account Balances Over Time
 - Credit Score Over Time
 
-**As of 03/11/19 the GUI Dash app just shows the two graphs and has no layout or style**
+**As of 03/11/19 the GUI Dash app has 2 graphs, incredibly basic styles, and a super basic navbar**
 
 **Using Minterface GUI**
 
