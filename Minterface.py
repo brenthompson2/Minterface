@@ -36,23 +36,62 @@ credit_score_over_time_data.append({'x': dates, 'y': credit_scores, 'type':'line
 
 # Draw Dash app layout
 app.layout = html.Div([
-    dcc.Graph(id='AccountData',
-        figure = {
-            'data': account_balances_over_time_data,
-            'layout': {
-                'title': 'Account Balances Over Time'
-            }
-        }
+    # URL bar, doesn't render anything
+    dcc.Location(id='url', refresh=False),
+
+    # Navbar
+    html.Nav(
+        html.Div(
+            children=[
+                html.Ul(
+                    children=[
+                        dcc.Link('Accounts Over Time', href='/accounts-over-time',
+                            className='nav-li'
+                        ),
+                        dcc.Link('Credit Score Over Time', href='/credit-over-time',
+                            className='nav-li'
+                        ),
+                    ],
+                    id='nav-mobile',
+                    className='nav'
+                ), 
+            ],
+            className='nav-wrapper'
+        ),
+        className='navbar'
     ),
-    dcc.Graph(id='CreditScore',
-        figure = {
-            'data': credit_score_over_time_data,
-            'layout': {
-                'title': 'Credit Score Over Time'
-            }
-        }
-    )
+
+    # Content
+    html.Div(id='page-content')    
 ])
+
+# Page Navigation Callback
+@app.callback(dash.dependencies.Output('page-content', 'children'),
+            [dash.dependencies.Input('url', 'pathname')])
+def display_page(pathname):
+    if pathname == '/credit-over-time':
+        return dcc.Graph(id='CreditScore',
+            figure = {
+                'data': credit_score_over_time_data,
+                'layout': {
+                    'title': 'Credit Score Over Time',
+                    'plot_bgcolor': '#708090',
+                    'paper_bgcolor': '#708090'
+                }
+            }
+        )
+    else:
+        return dcc.Graph(id='AccountData',
+            figure = {
+                'data': account_balances_over_time_data,
+                'layout': {
+                    'title': 'Account Balances Over Time',
+                    'plot_bgcolor': '#708090',
+                    'paper_bgcolor': '#708090'
+                }
+            }
+        )
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

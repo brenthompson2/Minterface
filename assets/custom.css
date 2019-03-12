@@ -1,0 +1,29 @@
+body{
+    margin: 0%;
+    padding: 0;
+    background-color: #708090;
+}
+
+.navbar{
+    margin: 0%;
+    padding: 0;
+    background-color: slateblue;
+}
+
+.nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.nav-li {
+  display: inline-block;
+  padding: 20px;
+  margin: 0;
+  color: #DDD;
+  text-decoration: none;
+}
+
+.nav-li:hover {
+  color: #FFF;
+}
