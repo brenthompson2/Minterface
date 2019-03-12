@@ -43,6 +43,8 @@ app.layout = html.Div([
     html.Nav(
         html.Div(
             children=[
+                html.P('Minterface',
+                        className='logo'),
                 html.Ul(
                     children=[
                         dcc.Link('Accounts Over Time', href='/accounts-over-time',
@@ -53,7 +55,7 @@ app.layout = html.Div([
                         ),
                     ],
                     id='nav-mobile',
-                    className='nav'
+                    className='nav nav-right'
                 ), 
             ],
             className='nav-wrapper'
@@ -62,7 +64,8 @@ app.layout = html.Div([
     ),
 
     # Content
-    html.Div(id='page-content')    
+    html.Div(id='page-content',
+            className='content')
 ])
 
 # Page Navigation Callback
@@ -75,8 +78,17 @@ def display_page(pathname):
                 'data': credit_score_over_time_data,
                 'layout': {
                     'title': 'Credit Score Over Time',
-                    'plot_bgcolor': '#708090',
-                    'paper_bgcolor': '#708090'
+                    'plot_bgcolor': '#2b2b2b',
+                    'paper_bgcolor': '#2b2b2b',
+                    'font': {
+                        'color': '#fff'
+                    },
+                    'xaxis': {
+                        'color': '#fff'
+                    },
+                    'yaxis': {
+                        'color': '#fff'
+                    }
                 }
             }
         )
@@ -86,12 +98,20 @@ def display_page(pathname):
                 'data': account_balances_over_time_data,
                 'layout': {
                     'title': 'Account Balances Over Time',
-                    'plot_bgcolor': '#708090',
-                    'paper_bgcolor': '#708090'
+                    'plot_bgcolor': '#2b2b2b',
+                    'paper_bgcolor': '#2b2b2b',
+                    'font': {
+                        'color': '#fff'
+                    },
+                    'xaxis': {
+                        'color': '#fff'
+                    },
+                    'yaxis': {
+                        'color': '#fff'
+                    }
                 }
             }
         )
-
 
 if __name__ == '__main__':
     app.run_server(debug=True)
