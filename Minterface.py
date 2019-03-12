@@ -33,7 +33,6 @@ for date, credit_score in credit_score_over_time.items():
     dates.append(date)
     credit_scores.append(credit_score)
 credit_score_over_time_data.append({'x': dates, 'y': credit_scores, 'type':'line', 'name':'Credit Score Over Time'})
-print(credit_score_over_time_data)
 
 # Draw Dash app layout
 app.layout = html.Div([
