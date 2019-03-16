@@ -15,11 +15,11 @@ class GraphAccountBalancesOverTime(object):
         Initializes the layout used for displaying this component
         """
         return html.Div([
-            dcc.Graph(id='CreditScore',
+            dcc.Graph(id='AccountData',
                 figure = {
                     'data': self.account_balances_over_time_data,
                     'layout': {
-                        'title': 'Credit Score Over Time',
+                        'title': 'Account Balances Over Time',
                         'plot_bgcolor': '#2b2b2b',
                         'paper_bgcolor': '#2b2b2b',
                         'font': {
