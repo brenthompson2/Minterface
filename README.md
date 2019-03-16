@@ -5,7 +5,7 @@ analysis of financial data from [Intuit Mint](https://www.mint.com/).
 
 - **Minterface CLI** is a lightweight command line interface for getting the different pieces of Mint data
 and writing each to a file in a directory structure that allows for daily updates.
-- **MinterfaceGUI** is the main GUI dashboard for displaying reports that allow
+- **Minterface GUI** is the main GUI dashboard for displaying reports that allow
 for advanced data analysis on the Mint data.
 
 These tools are written in Python and the GUI uses the [Dash](https://plot.ly/products/dash/) UI framework by Plotly.
@@ -51,7 +51,7 @@ spending that went to each category for all pay periods
 - **Spending Per Category Per Paycheck Over Time** = A line graph tracking how much was spent
  per transaction category per paycheck over time
 
-# Minterface
+# Minterface GUI
 
 Minterface is the main GUI dashboard for displaying reports that allow
 for advanced data analysis on the Mint data.
