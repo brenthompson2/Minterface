@@ -44,6 +44,15 @@ class MintHistoryReader(object):
             credit_history[folder_date] = infile.readline()
         return credit_history
 
+    def get_latest_transactions(self):
+        """
+        Get the dataframe of transactions from the most recent save
+        """
+        latest_folder_date = os.listdir(self.history_path)[-1]
+        file_path = os.path.join(self.history_path, latest_folder_date, "Transactions.csv")
+        return pd.read_csv(file_path)
+
+
 # region Test the class
 
 # print("\n===================================================================")
@@ -60,5 +69,9 @@ class MintHistoryReader(object):
 # credit_score_over_time = reader.get_credit_score_over_time()
 # print("\ncredit_score_over_time:")
 # print(credit_score_over_time)
+
+# latest_transactions = reader.get_latest_transactions()
+# print("\nlatest_transactions:")
+# print(latest_transactions)
 
 # endregion

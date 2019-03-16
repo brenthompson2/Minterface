@@ -38,21 +38,16 @@ def mkdir_p(path):
 class MintAnalyzer(object):
     """
     Exposes methods for advanced analysis on Intuit Mint data
-    
-    TODO: Use MintHistoryReader instead of MintManager
     """
 
-    def __init__(self, mint_manager):
-        self.mint = mint_manager
+    def __init__(self):
         self.mint_history_reader = MintHistoryReader.MintHistoryReader()
 
-    def get_transactions_per_paycheck(self, transactions=None):
+    def get_transactions_per_paycheck(self):
         """
         Get a dictionary of transactions per pay period keyed by pay date where the value is a pandas DataFrame
         """
-        print("Getting transactions per pay period...")
-        if transactions is None:
-            transactions = self.mint.get_transactions()
+        transactions = self.mint_history_reader.get_latest_transactions()
 
         # Get paycheck dates
         transactions = transactions.set_index(['date'])
@@ -64,11 +59,11 @@ class MintAnalyzer(object):
         for i in range(len(paycheck_dates) - 1):
             transactions_in_period = transactions.loc[paycheck_dates[i]:paycheck_dates[i + 1]]
             transactions_in_period = transactions_in_period.drop(paycheck_dates[i])
-            transactions_per_pay_period[paycheck_dates[i + 1].strftime("%Y-%m-%d")] = transactions_in_period
+            transactions_per_pay_period[paycheck_dates[i + 1]] = transactions_in_period
 
         return transactions_per_pay_period
 
-    def save_transactions_per_paycheck(self, transactions=None, transactions_per_paycheck=None):
+    def save_transactions_per_paycheck(self):
         """
         Writes a file for each pay period showing the transactions that were made during it
 
@@ -76,11 +71,7 @@ class MintAnalyzer(object):
         :param transactions_per_paycheck: the dictionary of transactions per pay period
                 keyed by pay date where the value is a pandas DataFrame
         """
-        if transactions_per_paycheck is None:
-            if transactions is None:
-                transactions_per_paycheck = self.get_transactions_per_paycheck()
-            else:
-                transactions_per_paycheck = self.get_transactions_per_paycheck(transactions)
+        transactions_per_paycheck = self.get_transactions_per_paycheck()
 
         # Write transactions to file for each pay date
         for pay_date, transactions_in_period in transactions_per_paycheck.items():
@@ -91,7 +82,7 @@ class MintAnalyzer(object):
             pd.DataFrame.to_csv(transactions_in_period, outfile_name)
         print("Saved transactions for paycheck\n")
 
-    def get_spending_per_category_per_paycheck(self, transactions=None, transactions_per_paycheck=None):
+    def get_spending_per_paycheck_per_category(self):
         """
         Get a dictionary keyed by pay date where the value is
         a pandas DataFrame of amount spent per transaction category for that paycheck
@@ -100,11 +91,7 @@ class MintAnalyzer(object):
         :param transactions_per_paycheck: the dictionary of transactions per paycheck
                 keyed by pay date where the value is a pandas DataFrame
         """
-        if transactions_per_paycheck is None:
-            if transactions is None:
-                transactions_per_paycheck = self.get_transactions_per_paycheck()
-            else:
-                transactions_per_paycheck = self.get_transactions_per_paycheck(transactions)
+        transactions_per_paycheck = self.get_transactions_per_paycheck()
 
         # Get the amount spent per category for each paycheck
         spending_per_category_per_pay_period = {}
@@ -115,15 +102,14 @@ class MintAnalyzer(object):
 
         return spending_per_category_per_pay_period
 
-    def save_spending_per_category_per_paycheck(self, spending_per_category_per_paycheck=None):
+    def save_spending_per_paycheck_per_category(self):
         """
         Writes a file for each pay period showing the amount spent per category
 
         :param spending_per_category_per_paycheck: the dictionary keyed by pay date where the value is
                 a pandas DataFrame of amount spent per transaction category for that paycheck
         """
-        if spending_per_category_per_paycheck is None:
-            spending_per_category_per_paycheck = self.get_spending_per_category_per_paycheck()
+        spending_per_category_per_paycheck = self.get_spending_per_paycheck_per_category()
 
         # Write amount spent per category to file for each pay date
         for pay_date, amount_spent_per_category in spending_per_category_per_paycheck.items():
@@ -136,7 +122,7 @@ class MintAnalyzer(object):
 
         print("Saved amount spent per category per paycheck\n")
 
-    def get_account_balances_over_time(self, account_history=None):
+    def get_account_balances_over_time(self):
         """
         Get a dictionary keyed by (account_provider,account_name) where the value is
         a dictionary containing a list of retrieval dates and a list of associated balances {'dates': [YYYY-MM-DD], 'balances': [$]}.
@@ -145,8 +131,7 @@ class MintAnalyzer(object):
         :param transactions: a dictionary keyed by (account_provider,account_name) where the value is 
         a dictionary containing a list of retrieval dates and a list of associated balances {'dates': [YYYY-MM-DD], 'balances': [$]}
         """
-        if account_history is None:
-            account_history = self.mint_history_reader.get_accounts_over_time()
+        account_history = self.mint_history_reader.get_accounts_over_time()
 
         # Get accounts
         first_key = list(account_history.keys())[0]

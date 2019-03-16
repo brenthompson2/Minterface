@@ -33,12 +33,8 @@ def save_all_data(manager, analyzer):
 
     txs = manager.get_transactions()
     manager.save_transactions(txs)
-
-    txs_per_paycheck = analyzer.get_transactions_per_paycheck(txs)
-    analyzer.save_transactions_per_paycheck(None, txs_per_paycheck)
-
-    spending_per_category_per_paycheck = analyzer.get_spending_per_category_per_paycheck(None, txs_per_paycheck)
-    analyzer.save_spending_per_category_per_paycheck(spending_per_category_per_paycheck)
+    analyzer.save_transactions_per_paycheck()
+    analyzer.save_spending_per_paycheck_per_category()
 
 
 def save_select_data(manager, analyzer):
@@ -69,10 +65,9 @@ def save_select_data(manager, analyzer):
     if response == 'y' or response == 'Y':
         analyzer.save_transactions_per_paycheck()
 
-    response = input("Save Spending Per Category Per Paycheck? (y/n): ")
+    response = input("Save Spending Per Paycheck Per Category? (y/n): ")
     if response == 'y' or response == 'Y':
-        data = analyzer.get_spending_per_category_per_paycheck()
-        analyzer.save_spending_per_category_per_paycheck(data)
+        analyzer.save_spending_per_paycheck_per_category()
 
 
 def read_select_data(analyzer):
@@ -101,7 +96,7 @@ print("===================================================================\n")
 response = input("Retrieve Latest Intuit Mint Data? (y/n): ")
 if response == 'y' or response == 'Y':
     mint_manager = login()
-    mint_analyzer = MintAnalyzer.MintAnalyzer(mint_manager)
+    mint_analyzer = MintAnalyzer.MintAnalyzer()
 
     response = input("Save All Data? (y/n): ")
     if response == 'y' or response == 'Y':
@@ -112,7 +107,7 @@ if response == 'y' or response == 'Y':
             save_select_data(mint_manager, mint_analyzer)
 else:
     mint_manager = None
-    mint_analyzer = MintAnalyzer.MintAnalyzer(None)
+    mint_analyzer = MintAnalyzer.MintAnalyzer()
 # endregion
 
 # region Read History
