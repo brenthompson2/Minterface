@@ -2,10 +2,11 @@ import datetime
 import errno
 import os
 import os.path
+import sys
 
 import pandas as pd
 
-from MintHistoryReader import MintHistoryReader
+from . import MintHistoryReader
 
 # region Constants
 
@@ -35,11 +36,15 @@ def mkdir_p(path):
 
 
 class MintAnalyzer(object):
-    """Exposes methods for advanced analysis on Intuit Mint data"""
+    """
+    Exposes methods for advanced analysis on Intuit Mint data
+    
+    TODO: Use MintHistoryReader instead of MintManager
+    """
 
     def __init__(self, mint_manager):
         self.mint = mint_manager
-        self.mint_history_reader = MintHistoryReader()
+        self.mint_history_reader = MintHistoryReader.MintHistoryReader()
 
     def get_transactions_per_paycheck(self, transactions=None):
         """
@@ -48,9 +53,9 @@ class MintAnalyzer(object):
         print("Getting transactions per pay period...")
         if transactions is None:
             transactions = self.mint.get_transactions()
-        transactions = transactions.set_index(['date'])
 
         # Get paycheck dates
+        transactions = transactions.set_index(['date'])
         paychecks = transactions[transactions['category'] == 'paycheck']
         paycheck_dates = paychecks.index
 
@@ -195,7 +200,23 @@ class MintAnalyzer(object):
         return credit_history_copy
 
 # region Test the Class
+
+# print("\n===================================================================")
+# print("MintAnalyzer test")
+# print("===================================================================\n")
+
 # mint_analyzer = MintAnalyzer(None)
-# mint_analyzer.get_credit_score_over_time()
+
+# print("transactions_per_paycheck:")
+# print(mint_analyzer.get_transactions_per_paycheck())
+
+# print("\nspending_per_category_per_paycheck:")
+# print(mint_analyzer.get_spending_per_category_per_paycheck())
+
+# print("\naccount_balances_over_time:")
+# print(mint_analyzer.get_account_balances_over_time())
+
+# print("\ncredit_score_over_time:")
+# print(mint_analyzer.get_credit_score_over_time())
 
 # endregion

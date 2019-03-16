@@ -1,5 +1,4 @@
-from MintManager import MintManager
-from MintAnalyzer import MintAnalyzer
+from services import MintManager, MintAnalyzer
 
 # region Helper Functions
 
@@ -18,7 +17,7 @@ def login():
         print("Please supply your Intuit Mint credentials:")
         username = input("Username: ")
         password = input("Password: ")
-    return MintManager(username, password)
+    return MintManager.MintManager(username, password)
 
 
 def save_all_data(manager, analyzer):
@@ -93,18 +92,16 @@ def read_select_data(analyzer):
 # endregion
 
 
-print("\n\n")
-print("===================================================================")
+print("\n===================================================================")
 print("Welcome to Minterface CLI, a command line interface for saving Intuit Mint account data to disk")
-print("===================================================================")
-print("\n")
+print("===================================================================\n")
 
-    
+
 # region Login to mint & Save latest data
 response = input("Retrieve Latest Intuit Mint Data? (y/n): ")
 if response == 'y' or response == 'Y':
     mint_manager = login()
-    mint_analyzer = MintAnalyzer(mint_manager)
+    mint_analyzer = MintAnalyzer.MintAnalyzer(mint_manager)
 
     response = input("Save All Data? (y/n): ")
     if response == 'y' or response == 'Y':
@@ -115,7 +112,7 @@ if response == 'y' or response == 'Y':
             save_select_data(mint_manager, mint_analyzer)
 else:
     mint_manager = None
-    mint_analyzer = MintAnalyzer(None)
+    mint_analyzer = MintAnalyzer.MintAnalyzer(None)
 # endregion
 
 # region Read History

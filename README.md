@@ -5,10 +5,10 @@ analysis of financial data from [Intuit Mint](https://www.mint.com/).
 
 - **Minterface CLI** is a lightweight command line interface for getting the different pieces of Mint data
 and writing each to a file in a directory structure that allows for daily updates.
-- **Minterface** is the main GUI dashboard for displaying reports that allow
+- **MinterfaceGUI** is the main GUI dashboard for displaying reports that allow
 for advanced data analysis on the Mint data.
 
-These tools are written in Python and the [Dash](https://plot.ly/products/dash/) UI framework by Plotly.
+These tools are written in Python and the GUI uses the [Dash](https://plot.ly/products/dash/) UI framework by Plotly.
 In order to scrape the data from Mint, they use the [MintAPI by mrooney](https://github.com/mrooney/mintapi). 
 
 # Advanced Mint Data Analysis
@@ -75,15 +75,15 @@ and writing each to a file in a directory structure that allows for daily update
 ```
 history/
     <YYYY-MM-DD>/ (The date that the data was stored)
-        Accounts.csv
-        Budgets.csv
-        CreditScore.csv
-        NetWorth.csv
-        Transactions.csv
+        - Accounts.csv
+        - Budgets.csv
+        - CreditScore.csv
+        - NetWorth.csv
+        - Transactions.csv
         SpendingPerPaycheck/
             <YYYY-MM-DD>/ (The date of each paycheck)
-                Categories.csv
-                Transactions.csv
+                - Categories.csv
+                - Transactions.csv
             ...
             ...
             ...
