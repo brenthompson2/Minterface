@@ -60,12 +60,10 @@ Graphs:
 - Account Balances Over Time
 - Credit Score Over Time
 
-**As of 03/11/19 the GUI Dash app has 2 graphs, incredibly basic styles, and a super basic navbar**
-
 **Using Minterface GUI**
 
-1. Run the application with `</path/to/python/> ./Minterface.py`
-1. After the data is analyzed, the GUI should be visible at the url mentioned in the terminal
+1. Run the application with `</path/to/python/> ./MinterfaceGUI.py`
+1. The GUI should be visible at the url mentioned in the terminal
 
 # Minterface CLI
 
