@@ -27,6 +27,9 @@ class HeaderBar(object):
                                 dcc.Link('Credit Score Over Time', href='/credit-over-time',
                                     className='nav-li'
                                 ),
+                                dcc.Link('Spending Per Category Per Paycheck', href='/spending-per-category-per-paycheck-data',
+                                    className='nav-li'
+                                ),
                             ],
                             id='nav-mobile',
                             className='nav nav-right'

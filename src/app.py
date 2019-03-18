@@ -1,7 +1,7 @@
 import dash
 
 from services import MintAnalyzer
-from components import GraphCreditScoreOverTime, GraphAccountBalancesOverTime, HeaderBar
+from components import HeaderBar, GraphAccountBalancesOverTime, GraphCreditScoreOverTime, GraphSpendingPerCategoryPerPaycheck 
 
 class Application(object):
     """
@@ -22,12 +22,14 @@ class Application(object):
         """
         Initialize the components that make up the application
         """
-        self.graph_credit_score_over_time = GraphCreditScoreOverTime.GraphCreditScoreOverTime(self.mint_analyzer)
-        self.graph_account_balances_over_time = GraphAccountBalancesOverTime.GraphAccountBalancesOverTime(self.mint_analyzer)
         self.headerbar = HeaderBar.HeaderBar()
+
+        self.graph_account_balances_over_time = GraphAccountBalancesOverTime.GraphAccountBalancesOverTime(self.mint_analyzer)
+        self.graph_credit_score_over_time = GraphCreditScoreOverTime.GraphCreditScoreOverTime(self.mint_analyzer)
+        self.graph_spending_per_category_per_paycheck = GraphSpendingPerCategoryPerPaycheck.GraphSpendingPerCategoryPerPaycheck(self.mint_analyzer)
 
     def init_dependencies(self):
         """
         Initialize the core dependencies used throughout the application
         """
-        self.mint_analyzer = MintAnalyzer.MintAnalyzer(None)
+        self.mint_analyzer = MintAnalyzer.MintAnalyzer()

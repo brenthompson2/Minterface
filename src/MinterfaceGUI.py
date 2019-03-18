@@ -34,10 +34,19 @@ minterface.app.layout = html.Div([
     [dash.dependencies.Input('url', 'pathname')])
 def display_page(pathname):
     header_component = minterface.headerbar.layout
+
+    page_content = None
     if pathname == '/credit-over-time':
         page_content = minterface.graph_credit_score_over_time.layout
-    else:
+    if pathname == '/accounts-over-time':
         page_content = minterface.graph_account_balances_over_time.layout
+    if pathname == '/spending-per-category-per-paycheck-data':
+        page_content = minterface.graph_spending_per_category_per_paycheck.layout
+
+    # TODO: Create homepage page_content
+    if page_content is None:
+        page_content = minterface.graph_credit_score_over_time.layout
+
     return header_component, page_content
 
 # endregion

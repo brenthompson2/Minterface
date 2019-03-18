@@ -41,6 +41,7 @@ the amount spent per transaction category during that pay period
 
 - **Accounts Over Time** = A line graph tracking account balances over time
 - **Credit Score Over Time** = A line graph tracking credit score over time
+- **Spending Per Category Per Paycheck Over Time** = A line graph with a line trace per category where the X values are the paycheck dates and the Y values are the amounts spent in that category for that pay period.
 
 **As of 03/11/19 nothing below here is implemented**
 
